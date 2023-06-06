@@ -1,7 +1,7 @@
 import 'package:reactiv/reactiv.dart';
 
 class Controller extends ReactiveController {
-  ReactiveInt weightIndex = ReactiveInt(62);
-  ReactiveInt ageIndex = ReactiveInt(25);
+  ReactiveInt weightIndex = ReactiveInt(60);
+  ReactiveInt ageIndex = ReactiveInt(20);
 
 }

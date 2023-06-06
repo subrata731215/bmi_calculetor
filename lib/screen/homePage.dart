@@ -5,8 +5,11 @@ import 'package:bmi_calculator_reactiv/cardContainer/weightAgeContainer.dart';
 import 'package:bmi_calculator_reactiv/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator_reactiv/constants.dart';
+import 'package:reactiv/reactiv.dart';
 
 class HomePage extends StatelessWidget {
+  var controller = Controller();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,18 +39,30 @@ class HomePage extends StatelessWidget {
                 sizedBox,
                 Row(
                   children: [
-                    WeightAgeContainer(
-                        title: 'Weight',
-                        weightAge: Controller().weightIndex.value,
-                        baseLineText: 'Kg',
-                        deCreseOnp: () {},
-                        inCreaseOnp: () {}),
-                    WeightAgeContainer(
-                        title: 'Age',
-                        weightAge: Controller().ageIndex.value,
-                        baseLineText: 'Years',
-                        deCreseOnp: () {},
-                        inCreaseOnp: () {})
+                    Observer(
+                      listenable: controller.weightIndex,
+                      listener: (weight) {
+                        return WeightAgeContainer(
+                            title: 'Weight',
+                            weightAge: weight,
+                            baseLineText: 'Kg',
+                            deCreseOnp: () {},
+                            inCreaseOnp: () {
+                              weight++;
+                            });
+                      },
+                    ),
+                    sizedBox,
+                    Observer(
+                        listenable: controller.ageIndex,
+                        listener: (age) {
+                          return WeightAgeContainer(
+                              title: 'Age',
+                              weightAge: age,
+                              baseLineText: 'years',
+                              deCreseOnp: () {},
+                              inCreaseOnp: () {});
+                        })
                   ],
                 ),
               ],
