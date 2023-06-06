@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:bmi_calculator_reactiv/constants.dart';
 import 'package:reactiv/reactiv.dart';
 
-class HomePage extends StatelessWidget {
-  var controller = Controller();
+class HomePage extends ReactiveWidget<AlldataController> {
+  @override
+  AlldataController bindController() {
+    return AlldataController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class HomePage extends StatelessWidget {
                       listener: (weight) {
                         return WeightAgeContainer(
                             title: 'Weight',
-                            weightAge: weight,
+                            weightAge:weight,
                             baseLineText: 'Kg',
                             deCreseOnp: () {},
                             inCreaseOnp: () {
@@ -74,61 +77,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-//
-// WeightAgeContainer
-// (
-// title: 'Weight',
-// weightAge: weight,
-// baseLineText: 'Kg',
-//
-//
-// deCreseOnp: () {
-// controller.weightDecrease();
-// },
-// inCreaseOnp: () {
-// controller.weightIncrease();
-//
-// );
-// })
-// ,
-//
-// sizedBox
-// ,
-// // Observer(
-// // listenable: controller.ageIndex,
-// // listener: (age) {
-// // return WeightAgeContainer(
-// // title: 'Age',
-// // weightAge: age,
-// // baseLineText: 'Years',
-// // deCreseOnp: () {
-// // controller.ageDecrease();
-// // },
-// // inCreaseOnp: () {
-// // controller.ageIncrease();
-// // },
-// // );
-// // }
-// //),
-//
-//
-// //
-// // Observer3(
-// // listenable: controller.weightIndex,
-// // listenable2: controller.weightDecrease,
-// // listenable3: controller.weightIncrease(),
-// // listener: (int data1, data2, data3) {
-// // return WeightAgeContainer(
-// // title: 'Weight',
-// // weightAge: data1=controller.weightIndex.value,
-// // baseLineText: 'kg',
-// // deCreseOnp: () {
-// // data2=controller.weightDecrease();
-// // },
-// // inCreaseOnp: () {
-// // data3=controller.weightIncrease();
-// // },
-// // );
-// // },
-// // ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class HeightContainer extends StatelessWidget {
-  HeightContainer({Key? key}) : super(key: key);
   double value = 30;
 
   @override
@@ -26,7 +25,10 @@ class HeightContainer extends StatelessWidget {
             children: [
               Text(
                 '${value.toInt()}',
-                style: const TextStyle(fontSize: 50, color: Colors.white,fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 50,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
               sizedBox,
               const Text(

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class MaleFemaleContainer extends StatelessWidget {
-   MaleFemaleContainer({super.key, required this.icon, required this.title});
+  MaleFemaleContainer({required this.icon, required this.title});
 
   IconData icon;
   String title;
