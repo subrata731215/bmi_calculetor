@@ -1,9 +1,17 @@
+import 'package:bmi_calculator_reactiv/controller.dart';
 import 'package:flutter/material.dart';
+import 'package:reactiv/reactiv.dart';
 
 import '../constants.dart';
 
-class HeightContainer extends StatelessWidget {
-  double value = 30;
+class HeightContainer extends ReactiveWidget<AlldataController> {
+
+  var b = AlldataController().sliderValue.value;
+
+  @override
+  AlldataController bindController() {
+    return AlldataController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,7 @@ class HeightContainer extends StatelessWidget {
             textBaseline: TextBaseline.ideographic,
             children: [
               Text(
-                '${value.toInt()}',
+                controller.sliderValue.value.toString(),
                 style: const TextStyle(
                     fontSize: 50,
                     color: Colors.white,
@@ -37,12 +45,18 @@ class HeightContainer extends StatelessWidget {
               ),
             ],
           ),
-          Slider(
-            max: 70,
-            min: 20,
-            value: value,
-            onChanged: (newValue) {
-              newValue = value;
+          Observer(
+            listenable: controller.sliderValue,
+            listener: (newSliderValue) {
+              return Slider(
+                min: 100,
+                max: 200,
+                value: newSliderValue.toDouble(),
+                onChanged: ( onchangeValue) {
+                  print(newSliderValue);
+                  newSliderValue =onchangeValue.round();
+                },
+              );
             },
           ),
         ],

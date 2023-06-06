@@ -14,7 +14,7 @@ class WeightAgeContainer extends StatelessWidget {
   String title;
   int weightAge;
   String baseLineText;
-  Function()? inCreaseOnp;
+  VoidCallback inCreaseOnp;
   VoidCallback deCreseOnp;
 
   @override
@@ -60,7 +60,7 @@ class WeightAgeContainer extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed:inCreaseOnp ,
+                  onPressed:inCreaseOnp,
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                   ),

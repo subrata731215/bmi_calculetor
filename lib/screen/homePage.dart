@@ -46,13 +46,16 @@ class HomePage extends ReactiveWidget<AlldataController> {
                       listenable: controller.weightIndex,
                       listener: (weight) {
                         return WeightAgeContainer(
-                            title: 'Weight',
-                            weightAge:weight,
-                            baseLineText: 'Kg',
-                            deCreseOnp: () {},
-                            inCreaseOnp: () {
-                              weight++;
-                            });
+                          title: 'Weight',
+                          weightAge: weight,
+                          baseLineText: 'Kg',
+                          deCreseOnp: () {
+                            controller.weightIndex.value--;
+                          },
+                          inCreaseOnp: () {
+                            controller.weightIndex.value++;
+                          },
+                        );
                       },
                     ),
                     sizedBox,
@@ -63,8 +66,12 @@ class HomePage extends ReactiveWidget<AlldataController> {
                               title: 'Age',
                               weightAge: age,
                               baseLineText: 'years',
-                              deCreseOnp: () {},
-                              inCreaseOnp: () {});
+                              deCreseOnp: () {
+                                controller.ageIndex.value--;
+                              },
+                              inCreaseOnp: () {
+                                controller.ageIndex.value++;
+                              });
                         })
                   ],
                 ),
