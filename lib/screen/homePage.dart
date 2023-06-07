@@ -26,30 +26,43 @@ class HomePage extends ReactiveWidget<AlldataController> {
               children: [
                 Row(
                   children: [
-                    Observer(
-                      listenable: controller.activeColor,
-                      listener: (updateColor) {
+                    Observer2(
+                      listenable: controller.malecardColor,
+                      listenable2: controller.activeColor,
+                      listener: (maleColor, activeColor) {
                         return MaleFemaleContainer(
                           icon: Icons.male,
                           title: 'Male',
+                          backgroundColor: maleColor,
                           onp: () {
-                            if (updateColor == controller.activeColor) {
-                             controller.activeColor.value;
-                            }else{
-                              controller.inactiveColor.value;
+                            if (maleColor ==
+                                controller.malecardColor.value) {
+                              controller.malecardColor.value = activeColor;
+
+                              controller.femalecardColor.value =
+                                  controller.inactiveColor.value;
                             }
                           },
                         );
                       },
                     ),
                     sizedBox,
-                    Observer(
-                        listenable: controller.activeColor,
-                        listener: (updateColor) {
+                    Observer2(
+                        listenable: controller.femalecardColor,
+                        listenable2: controller.activeColor,
+                        listener: (femaleCardColor, activeColor) {
                           return MaleFemaleContainer(
                             icon: Icons.female,
                             title: 'FeMale',
-                            onp: () {},
+                            backgroundColor: femaleCardColor,
+                            onp: () {
+                              if (femaleCardColor ==
+                                  controller.femalecardColor.value) {
+                                controller.femalecardColor.value = activeColor;
+                                controller.malecardColor.value =
+                                    controller.inactiveColor.value;
+                              }
+                            },
                           );
                         }),
                   ],
