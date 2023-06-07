@@ -5,8 +5,7 @@ import 'package:reactiv/reactiv.dart';
 import '../constants.dart';
 
 class HeightContainer extends ReactiveWidget<AlldataController> {
-
-  var b = AlldataController().sliderValue.value;
+  //var b = AlldataController().sliderValue.value;
 
   @override
   AlldataController bindController() {
@@ -31,12 +30,17 @@ class HeightContainer extends ReactiveWidget<AlldataController> {
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.ideographic,
             children: [
-              Text(
-                controller.sliderValue.value.toString(),
-                style: const TextStyle(
-                    fontSize: 50,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+              Observer(
+                listenable: controller.sliderValue,
+                listener: (neww) {
+                  return Text(
+                    neww.toString(),
+                    style: const TextStyle(
+                        fontSize: 50,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  );
+                },
               ),
               sizedBox,
               const Text(
@@ -52,9 +56,8 @@ class HeightContainer extends ReactiveWidget<AlldataController> {
                 min: 100,
                 max: 200,
                 value: newSliderValue.toDouble(),
-                onChanged: ( onchangeValue) {
-                  print(newSliderValue);
-                  newSliderValue =onchangeValue.round();
+                onChanged: (onchangeValue) {
+                  controller.sliderValue.value = onchangeValue.round();
                 },
               );
             },

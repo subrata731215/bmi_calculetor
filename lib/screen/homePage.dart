@@ -26,15 +26,32 @@ class HomePage extends ReactiveWidget<AlldataController> {
               children: [
                 Row(
                   children: [
-                    MaleFemaleContainer(
-                      icon: Icons.male,
-                      title: 'Male',
+                    Observer(
+                      listenable: controller.activeColor,
+                      listener: (updateColor) {
+                        return MaleFemaleContainer(
+                          icon: Icons.male,
+                          title: 'Male',
+                          onp: () {
+                            if (updateColor == controller.activeColor) {
+                             controller.activeColor.value;
+                            }else{
+                              controller.inactiveColor.value;
+                            }
+                          },
+                        );
+                      },
                     ),
                     sizedBox,
-                    MaleFemaleContainer(
-                      icon: Icons.female,
-                      title: 'FeMale',
-                    ),
+                    Observer(
+                        listenable: controller.activeColor,
+                        listener: (updateColor) {
+                          return MaleFemaleContainer(
+                            icon: Icons.female,
+                            title: 'FeMale',
+                            onp: () {},
+                          );
+                        }),
                   ],
                 ),
                 sizedBox,
