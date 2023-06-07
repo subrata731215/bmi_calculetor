@@ -1,4 +1,6 @@
+import 'package:bmi_calculator_reactiv/cardContainer/calculateBmiButton.dart';
 import 'package:bmi_calculator_reactiv/screen/homePage.dart';
+import 'package:bmi_calculator_reactiv/screen/resultPage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,16 +17,18 @@ class MyApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: Colors.pink),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Bmi CalCulator'),
-          centerTitle: true,
-          leading: const Icon(
-            Icons.filter_list,
-            size: 30,
-          ),
-        ),
         body: HomePage(),
       ),
+      initialRoute: Routes.homePage,
+      routes: {
+        Routes.homePage: (context) => HomePage(),
+        Routes.resultPage: (context) => ResultPage(),
+      },
     );
   }
+}
+
+class Routes {
+  static String homePage = 'homePage';
+  static String resultPage = 'resultPage';
 }

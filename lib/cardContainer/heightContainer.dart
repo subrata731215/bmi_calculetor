@@ -5,7 +5,7 @@ import 'package:reactiv/reactiv.dart';
 import '../constants.dart';
 
 class HeightContainer extends ReactiveWidget<AlldataController> {
-  //var b = AlldataController().sliderValue.value;
+
 
   @override
   AlldataController bindController() {

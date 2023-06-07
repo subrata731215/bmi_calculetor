@@ -1,4 +1,4 @@
-import 'package:bmi_calculator_reactiv/calculatePage.dart';
+import 'package:bmi_calculator_reactiv/cardContainer/calculateBmiButton.dart';
 import 'package:bmi_calculator_reactiv/cardContainer/heightContainer.dart';
 import 'package:bmi_calculator_reactiv/cardContainer/maleFemaleContainer.dart';
 import 'package:bmi_calculator_reactiv/cardContainer/weightAgeContainer.dart';
@@ -16,6 +16,14 @@ class HomePage extends ReactiveWidget<AlldataController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bmi CalCulator'),
+        centerTitle: true,
+        leading: const Icon(
+          Icons.filter_list,
+          size: 30,
+        ),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -108,7 +116,7 @@ class HomePage extends ReactiveWidget<AlldataController> {
               ],
             ),
           ),
-          CalCulateBmi(),
+          CalculateBmiButton(),
         ],
       ),
     );
