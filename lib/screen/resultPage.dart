@@ -5,6 +5,9 @@ import 'package:reactiv/reactiv.dart';
 import 'package:bmi_calculator_reactiv/main.dart';
 
 class ResultPage extends ReactiveWidget {
+
+
+
   @override
   AlldataController bindController() {
     return AlldataController();

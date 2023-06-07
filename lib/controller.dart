@@ -12,10 +12,7 @@ class AlldataController extends ReactiveController {
   Reactive malecardColor = Reactive(Color.fromARGB(45, 179, 48, 90));
   Reactive femalecardColor = Reactive(Color.fromARGB(45, 179, 48, 90));
 
-  bmiResult(){
+  bmiResult() {
     sliderValue;
-
   }
-
-
 }
