@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:bmi_calculator_reactiv/constants.dart';
 import 'package:bmi_calculator_reactiv/controller.dart';

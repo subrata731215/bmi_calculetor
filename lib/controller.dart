@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
-import 'dart:math';
 
 class AlldataController extends ReactiveController {
   final sliderValue = 120.reactiv;
