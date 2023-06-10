@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
 import 'package:bmi_calculator_reactiv/main.dart';
 
-class ResultPage extends ReactiveWidget {
-
-
-
+class ResultPage extends ReactiveWidget<AlldataController> {
   @override
   AlldataController bindController() {
     return AlldataController();
@@ -37,16 +34,33 @@ class ResultPage extends ReactiveWidget {
                 color: containerColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text('Normal',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 40)),
-                    Text('22.8',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 90)),
-                    Text('Description',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 40)),
+                  children: [
+                    Observer(
+                      listenable: controller.getResult().reactiv,
+                      listener: (result) {
+                        return Text(result.reactiv.value,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 40));
+                      },
+                    ),
+                    Observer(
+                        listenable: controller
+                            .calculateBmi()
+                            .toStringAsFixed(1)
+                            .reactiv,
+                        listener: (bmiResult) {
+                          return Text(bmiResult.reactiv.value,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 90));
+                        }),
+                    Observer(
+                      listenable: controller.getDescription().reactiv,
+                      listener: (description) {
+                        return Text(description.reactiv.value,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30));
+                      },
+                    ),
                   ],
                 ),
               ),

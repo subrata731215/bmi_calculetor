@@ -4,8 +4,6 @@ import 'package:reactiv/reactiv.dart';
 import '../constants.dart';
 
 class HeightContainer extends ReactiveWidget<AlldataController> {
-
-
   @override
   AlldataController bindController() {
     return AlldataController();

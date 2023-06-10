@@ -43,8 +43,7 @@ class HomePage extends ReactiveWidget<AlldataController> {
                           title: 'Male',
                           backgroundColor: maleColor,
                           onp: () {
-                            if (maleColor ==
-                                controller.malecardColor.value) {
+                            if (maleColor == controller.malecardColor.value) {
                               controller.malecardColor.value = activeColor;
 
                               controller.femalecardColor.value =
