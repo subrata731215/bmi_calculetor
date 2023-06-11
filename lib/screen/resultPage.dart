@@ -5,6 +5,8 @@ import 'package:reactiv/reactiv.dart';
 import 'package:bmi_calculator_reactiv/main.dart';
 
 class ResultPage extends ReactiveWidget<AlldataController> {
+  const ResultPage({super.key});
+
   @override
   AlldataController bindController() {
     return AlldataController();
@@ -13,72 +15,66 @@ class ResultPage extends ReactiveWidget<AlldataController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BMI RESULT'),
-        centerTitle: true,
-      ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: controller.getColor(),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 18.0),
-            child: Text(
-              'Your Result',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 60),
-            ),
-          ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Container(
-                width: double.infinity,
-                color: containerColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Observer(
-                      listenable: controller.getResult().reactiv,
-                      listener: (result) {
-                        return Text(result.reactiv.value,
+              padding: const EdgeInsets.only(left: 18.0,right: 18,top: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    '${controller.textEditingController.text} \'s Bmi Result',
+                    style:
+                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                        left: 10, right: 10, top: 40, bottom: 40),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: containerColor,
+                        borderRadius: BorderRadius.circular(40)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(controller.getResult(),
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 40));
-                      },
-                    ),
-                    Observer(
-                        listenable: controller
-                            .calculateBmi()
-                            .toStringAsFixed(1)
-                            .reactiv,
-                        listener: (bmiResult) {
-                          return Text(bmiResult.reactiv.value,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 90));
-                        }),
-                    Observer(
-                      listenable: controller.getDescription().reactiv,
-                      listener: (description) {
-                        return Text(description.reactiv.value,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                                color: Colors.black)),
+                        Text(
+                            controller
+                                .calculateBmi()
+                                .toStringAsFixed(1)
+                                .toString(),
                             style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30));
-                      },
+                                fontWeight: FontWeight.bold, fontSize: 90)),
+                        Text(controller.getDescription(),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 30)),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.homePage);
+                    },
+                    child: const Text(
+                      'Re-Calculate',
+                      style: TextStyle(fontSize: 40),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0, top: 8.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: containerColor),
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.homePage);
-              },
-              child: const Text(
-                'Re-Calculate',
-                style: TextStyle(fontSize: 40),
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );

@@ -17,15 +17,11 @@ class WeightAgeContainer extends StatelessWidget {
   VoidCallback inCreaseOnp;
   VoidCallback deCreseOnp;
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
+        padding: const EdgeInsets.all(10),
         width: double.infinity,
         color: containerColor,
         child: Column(
@@ -63,7 +59,7 @@ class WeightAgeContainer extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed:inCreaseOnp,
+                  onPressed: inCreaseOnp,
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
                   ),

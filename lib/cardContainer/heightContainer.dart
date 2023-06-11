@@ -12,7 +12,7 @@ class HeightContainer extends ReactiveWidget<AlldataController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(8),
       width: double.infinity,
       color: containerColor,
       child: Column(
@@ -46,18 +46,51 @@ class HeightContainer extends ReactiveWidget<AlldataController> {
               ),
             ],
           ),
-          Observer(
-            listenable: controller.sliderValue,
-            listener: (newSliderValue) {
-              return Slider(
-                min: 100,
-                max: 200,
-                value: newSliderValue.toDouble(),
-                onChanged: (onchangeValue) {
-                  controller.sliderValue.value = onchangeValue.round();
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Observer(
+                  listenable: controller.sliderValue,
+                  listener: (remoIcon) {
+                    return IconButton(
+                        onPressed: () {
+                          if(controller.sliderValue.value>120){
+                            controller.sliderValue.value--;
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.remove,
+                        ));
+                  }),
+              Observer(
+                listenable: controller.sliderValue,
+                listener: (newSliderValue) {
+                  return Slider(
+                    min: 120,
+                    max: 200,
+                    activeColor: Colors.white,
+                    inactiveColor: Colors.black,
+                    thumbColor: Colors.greenAccent,
+                    value: newSliderValue.toDouble(),
+                    onChanged: (onchangeValue) {
+                      controller.sliderValue.value = onchangeValue.round();
+                    },
+                  );
                 },
-              );
-            },
+              ),
+              Observer(
+                listenable: controller.sliderValue,
+                listener: (addIcon) {
+                  return IconButton(
+                      onPressed: () {
+                        if(controller.sliderValue.value<200){
+                          controller.sliderValue.value++;
+                        }
+                      },
+                      icon: const Icon(Icons.add));
+                },
+              ),
+            ],
           ),
         ],
       ),

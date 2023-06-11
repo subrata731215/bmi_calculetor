@@ -16,6 +16,8 @@ class HomePage extends ReactiveWidget<AlldataController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Bmi CalCulator'),
         centerTitle: true,
@@ -25,97 +27,113 @@ class HomePage extends ReactiveWidget<AlldataController> {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  children: [
-                    Observer2(
-                      listenable: controller.malecardColor,
-                      listenable2: controller.activeColor,
-                      listener: (maleColor, activeColor) {
-                        return MaleFemaleContainer(
-                          icon: Icons.male,
-                          title: 'Male',
-                          backgroundColor: maleColor,
-                          onp: () {
-                            if (maleColor == controller.malecardColor.value) {
-                              controller.malecardColor.value = activeColor;
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 18.0,right: 18.0,top: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextField(
+                    controller: controller.textEditingController,
+                    textAlign: TextAlign.center,
+                    textCapitalization: TextCapitalization.sentences,
+                    style: const TextStyle(
 
-                              controller.femalecardColor.value =
-                                  controller.inactiveColor.value;
-                            }
-                          },
-                        );
-                      },
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
                     ),
-                    sizedBox,
-                    Observer2(
-                        listenable: controller.femalecardColor,
-                        listenable2: controller.activeColor,
-                        listener: (femaleCardColor, activeColor) {
-                          return MaleFemaleContainer(
-                            icon: Icons.female,
-                            title: 'FeMale',
-                            backgroundColor: femaleCardColor,
-                            onp: () {
-                              if (femaleCardColor ==
-                                  controller.femalecardColor.value) {
-                                controller.femalecardColor.value = activeColor;
-                                controller.malecardColor.value =
-                                    controller.inactiveColor.value;
-                              }
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(style: BorderStyle.solid),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      hintText: 'Input Your Name',
+                      hintStyle: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 35,
+                      ),
+                      fillColor: Colors.white,
+                      floatingLabelStyle:
+                          const TextStyle(fontSize: 30, color: Colors.white),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Observer(
+                          listenable: controller.maleCardColor,
+                          listener: (maleColor) {
+                            return MaleFemaleContainer(
+                              icon: Icons.man,
+                              title: 'Male',
+                              backgroundColor: maleColor,
+                              onp: () {
+                                controller.updateColor('Male');
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                      sizedBox,
+                      Expanded(
+                        child: Observer(
+                            listenable: controller.femaleCardColor,
+                            listener: (femaleCardColor) {
+                              return MaleFemaleContainer(
+                                icon: Icons.woman,
+                                title: 'FeMale',
+                                backgroundColor: femaleCardColor,
+                                onp: () {
+                                  controller.updateColor('Female');
+                                },
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+                  HeightContainer(),
+                  Row(
+                    children: [
+                      Observer(
+                        listenable: controller.weightIndex,
+                        listener: (weight) {
+                          return WeightAgeContainer(
+                            title: 'Weight',
+                            weightAge: weight,
+                            baseLineText: 'Kg',
+                            deCreseOnp: () {
+                              controller.weightIndex.value--;
+                            },
+                            inCreaseOnp: () {
+                              controller.weightIndex.value++;
                             },
                           );
-                        }),
-                  ],
-                ),
-                sizedBox,
-                HeightContainer(),
-                sizedBox,
-                Row(
-                  children: [
-                    Observer(
-                      listenable: controller.weightIndex,
-                      listener: (weight) {
-                        return WeightAgeContainer(
-                          title: 'Weight',
-                          weightAge: weight,
-                          baseLineText: 'Kg',
-                          deCreseOnp: () {
-                            controller.weightIndex.value--;
-                          },
-                          inCreaseOnp: () {
-                            controller.weightIndex.value++;
-                          },
-                        );
-                      },
-                    ),
-                    sizedBox,
-                    Observer(
-                        listenable: controller.ageIndex,
-                        listener: (age) {
-                          return WeightAgeContainer(
-                              title: 'Age',
-                              weightAge: age,
-                              baseLineText: 'years',
-                              deCreseOnp: () {
-                                controller.ageIndex.value--;
-                              },
-                              inCreaseOnp: () {
-                                controller.ageIndex.value++;
-                              });
-                        })
-                  ],
-                ),
-              ],
+                        },
+                      ),
+                      sizedBox,
+                      Observer(
+                          listenable: controller.ageIndex,
+                          listener: (age) {
+                            return WeightAgeContainer(
+                                title: 'Age',
+                                weightAge: age,
+                                baseLineText: 'years',
+                                deCreseOnp: () {
+                                  controller.ageIndex.value--;
+                                },
+                                inCreaseOnp: () {
+                                  controller.ageIndex.value++;
+                                });
+                          })
+                    ],
+                  ),
+                  CalculateBmiButton(),
+                ],
+              ),
             ),
           ),
-          CalculateBmiButton(),
         ],
       ),
     );
