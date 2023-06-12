@@ -1,4 +1,3 @@
-import 'package:bmi_calculator_reactiv/constants.dart';
 import 'package:bmi_calculator_reactiv/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:reactiv/reactiv.dart';
@@ -16,7 +15,6 @@ class ResultPage extends ReactiveWidget<AlldataController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: controller.getColor(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -36,7 +34,8 @@ class ResultPage extends ReactiveWidget<AlldataController> {
                         left: 10, right: 10, top: 40, bottom: 40),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: containerColor,
+                        color:      controller.getColor(),
+
                         borderRadius: BorderRadius.circular(40)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
